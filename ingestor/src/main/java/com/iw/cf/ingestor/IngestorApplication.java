@@ -4,9 +4,11 @@ import com.google.gson.Gson;
 import com.iw.cf.core.dto.Composer;
 import com.iw.cf.core.dto.Era;
 import com.iw.cf.core.dto.Genre;
+import com.iw.cf.core.dto.Work;
 import com.iw.cf.core.service.ComposerService;
 import com.iw.cf.core.service.EraService;
 import com.iw.cf.core.service.GenreService;
+import com.iw.cf.core.service.WorkService;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -57,8 +59,16 @@ implements CommandLineRunner {
 	@Autowired
 	private ComposerService composerService;
 
+	@Autowired
+	private WorkService workService;
+
 	@Override
 	public void run(String... args) throws FileNotFoundException {
+		workService.deleteAll();
+		composerService.deleteAll();
+		genreService.deleteAll();
+		eraService.deleteAll();
+
 		Gson gson = new Gson();
 		Map<String, Object> props = gson.fromJson(new FileReader(dataFilename), Map.class);
 
@@ -77,7 +87,6 @@ implements CommandLineRunner {
 		}
 
 		log.info("Creating genres...");
-		genreService.deleteAll();
 		for(String genreName: genres) {
 			Genre genre = new Genre();
 			genre.setName(genreName);
@@ -87,7 +96,6 @@ implements CommandLineRunner {
 		}
 
 		log.info("Creating eras...");
-		eraService.deleteAll();
 		for(String eraName: eras) {
 			Era era = new Era();
 			era.setName(eraName);
@@ -98,7 +106,6 @@ implements CommandLineRunner {
 		}
 
 		log.info("Creating composers...");
-		composerService.deleteAll();
 		for(Map<String, Object> composerInfo: composers) {
 			Composer composer = new Composer();
 			composer.setName((String) composerInfo.get("name"));
@@ -127,6 +134,20 @@ implements CommandLineRunner {
 
 			composerService.insert(composer);
 			log.info("Created composer '" + composer.getName() + "'");
+
+			List<Map<String, Object> > workInfos = (List<Map<String, Object> >) composerInfo.get("works");
+			for(Map<String, Object> workInfo: workInfos) {
+				Work work = new Work();
+				work.setTitle((String) workInfo.get("title"));
+				work.setSubtitle((String) workInfo.get("subtitle"));
+				work.setPopular("1".equals(workInfo.get("popular")));
+				work.setRecommended("1".equals(workInfo.get("recommended")));
+				work.setGenreId(genresByName.get(workInfo.get("genre")).getId());
+				work.setComposerId(composer.getId());
+				workService.insert(work);
+
+				log.info("  Created work '" + work.getTitle() + "'");
+			}
 		}
 	}
 

@@ -13,4 +13,5 @@ implements Serializable {
     private Boolean popular;
     private Boolean recommended;
     private Long genreId;
+    private Long composerId;
 }
