@@ -5,6 +5,8 @@ import com.iw.cf.core.dto.Work;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class WorkService {
 
@@ -17,5 +19,9 @@ public class WorkService {
 
     public void deleteAll() {
         workDao.deleteAll();
+    }
+
+    public List<Work> getRandomSampling(int limit) {
+        return workDao.getRandomSampling(limit);
     }
 }

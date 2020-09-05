@@ -14,6 +14,17 @@
         <result property="composerId" column="composer_id" jdbcType="NUMERIC" />
     </resultMap>
 
+    <sql id="selectFromSql">
+        SELECT w.id,
+               w.title,
+               w.subtitle,
+               w.popular,
+               w.recommended,
+               w.genre_id,
+               w.composer_id
+        FROM works w
+    </sql>
+
     <insert id="insert" parameterType="com.iw.cf.core.dto.Work"
             useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         INSERT INTO works(title,
@@ -34,5 +45,10 @@
         DELETE
         FROM works
     </delete>
+
+    <select id="getRandomSampling" parameterType="Integer" resultMap="resultMap">
+        <include refid="selectFromSql" />
+        ORDER BY RANDOM() LIMIT #{limit,jdbcType=NUMERIC}
+    </select>
 
 </mapper>

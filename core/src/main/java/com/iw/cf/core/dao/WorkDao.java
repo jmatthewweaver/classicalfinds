@@ -5,6 +5,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class WorkDao {
 
@@ -17,5 +19,9 @@ public class WorkDao {
 
     public void deleteAll() {
         sqlSession.delete("com.iw.cf.mybatis.Work.deleteAll");
+    }
+
+    public List<Work> getRandomSampling(int limit) {
+        return sqlSession.selectList("com.iw.cf.mybatis.Work.getRandomSampling", limit);
     }
 }
