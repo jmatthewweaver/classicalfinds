@@ -48,6 +48,7 @@
 
     <select id="getRandomSampling" parameterType="Integer" resultMap="resultMap">
         <include refid="selectFromSql" />
+        WHERE popular = TRUE
         ORDER BY RANDOM() LIMIT #{limit,jdbcType=NUMERIC}
     </select>
 

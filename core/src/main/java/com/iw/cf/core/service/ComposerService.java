@@ -18,4 +18,8 @@ public class ComposerService {
     public void deleteAll() {
         composerDao.deleteAll();
     }
+
+    public Composer getById(Long id) {
+        return composerDao.getById(id);
+    }
 }

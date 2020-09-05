@@ -16,6 +16,19 @@
         <result property="imageId" column="image_id" jdbcType="NUMERIC"/>
     </resultMap>
 
+    <sql id="selectFromSql">
+        SELECT c.id,
+               c.name,
+               c.complete_name,
+               c.era_id,
+               c.birth_date,
+               c.death_date,
+               c.popular,
+               c.recommended,
+               c.image_id
+        FROM composers c
+    </sql>
+
     <insert id="insert" parameterType="com.iw.cf.core.dto.Composer"
             useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         INSERT INTO composers(name,
@@ -37,6 +50,12 @@
     </insert>
 
     <delete id="deleteAll">
-        DELETE FROM composers
+        DELETE
+        FROM composers
     </delete>
+
+    <select id="getById" parameterType="Long" resultMap="resultMap">
+        <include refid="selectFromSql" />
+        WHERE id = #{id,jdbcType=NUMERIC}
+    </select>
 </mapper>

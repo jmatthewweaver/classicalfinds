@@ -18,4 +18,8 @@ public class ComposerDao {
     public void deleteAll() {
         sqlSession.delete("com.iw.cf.mybatis.Composer.deleteAll");
     }
+
+    public Composer getById(Long id) {
+        return sqlSession.selectOne("com.iw.cf.mybatis.Composer.getById", id);
+    }
 }
