@@ -1,2 +1,4 @@
 .idea/dataSources.xml
+.idea/libraries
+.idea/dataSources
 out/*
