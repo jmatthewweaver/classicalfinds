@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.iw.cf.mybatis.Composer">
+    <resultMap id="resultMap" type="com.iw.cf.core.dto.Composer">
+        <id property="id" column="id" jdbcType="NUMERIC"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="completeName" column="complete_name" jdbcType="VARCHAR"/>
+        <result property="eraId" column="era_id" jdbcType="VARCHAR"/>
+        <result property="birthDate" column="birth_date" jdbcType="TIMESTAMP"/>
+        <result property="deathDate" column="death_date" jdbcType="TIMESTAMP"/>
+        <result property="popular" column="popular" jdbcType="BOOLEAN"/>
+        <result property="recommended" column="recommended" jdbcType="BOOLEAN"/>
+        <result property="imageId" column="image_id" jdbcType="NUMERIC"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.iw.cf.core.dto.Composer"
+            useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO composers(name,
+                              complete_name,
+                              era_id,
+                              birth_date,
+                              death_date,
+                              popular,
+                              recommended,
+                              image_id)
+        VALUES (#{name,jdbcType=VARCHAR},
+                #{completeName,jdbcType=VARCHAR},
+                #{eraId,jdbcType=NUMERIC},
+                #{birthDate,jdbcType=TIMESTAMP},
+                #{deathDate,jdbcType=TIMESTAMP},
+                #{popular,jdbcType=BOOLEAN},
+                #{recommended,jdbcType=BOOLEAN},
+                #{imageId,jdbcType=NUMERIC})
+    </insert>
+
+    <delete id="deleteAll">
+        DELETE FROM composers
+    </delete>
+</mapper>
