@@ -5,6 +5,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class GenreDao {
 
@@ -17,5 +19,9 @@ public class GenreDao {
 
     public void deleteAll() {
         sqlSession.delete("com.iw.cf.mybatis.Genre.deleteAll");
+    }
+
+    public List<Genre> getWithVideos() {
+        return sqlSession.selectList("com.iw.cf.mybatis.Genre.getWithVideos");
     }
 }

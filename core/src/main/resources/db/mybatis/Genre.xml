@@ -9,6 +9,20 @@
         <result property="name" column="name" jdbcType="VARCHAR"/>
     </resultMap>
 
+    <sql id="selectFromSql">
+        SELECT g.id,
+               g.name
+        FROM genres g
+    </sql>
+
+    <select id="getWithVideos" resultMap="resultMap">
+        <include refid="selectFromSql"/>
+        WHERE (SELECT COUNT(1)
+                 FROM works w
+                 JOIN work_videos wv ON wv.work_id = w.id
+                WHERE w.genre_id = g.id) &lt;&gt; 0
+    </select>
+
     <insert id="insert" parameterType="com.iw.cf.core.dto.Genre"
             useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         INSERT INTO genres(name)
@@ -16,7 +30,8 @@
     </insert>
 
     <delete id="deleteAll">
-        DELETE FROM genres
+        DELETE
+        FROM genres
     </delete>
 
 </mapper>

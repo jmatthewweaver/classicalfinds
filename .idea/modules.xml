@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" />
       <module fileurl="file://$PROJECT_DIR$/ingestor/ingestor.iml" filepath="$PROJECT_DIR$/ingestor/ingestor.iml" />
       <module fileurl="file://$PROJECT_DIR$/worksearch/worksearch.iml" filepath="$PROJECT_DIR$/worksearch/worksearch.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wui/wui.iml" filepath="$PROJECT_DIR$/wui/wui.iml" />
     </modules>
   </component>
 </project>
