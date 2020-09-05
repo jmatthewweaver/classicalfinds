@@ -10,8 +10,10 @@ import com.google.api.services.youtube.model.SearchListResponse;
 import com.google.api.services.youtube.model.SearchResult;
 import com.iw.cf.core.dto.Composer;
 import com.iw.cf.core.dto.Work;
+import com.iw.cf.core.dto.WorkVideo;
 import com.iw.cf.core.service.ComposerService;
 import com.iw.cf.core.service.WorkService;
+import com.iw.cf.core.service.WorkVideoService;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -37,6 +39,9 @@ implements CommandLineRunner {
 	@Autowired
 	private ComposerService composerService;
 
+	@Autowired
+	private WorkVideoService workVideoService;
+
 	public static void main(String[] args) {
 		SpringApplication.run(WorksearchApplication.class, args);
 	}
@@ -53,26 +58,39 @@ implements CommandLineRunner {
 				.setYouTubeRequestInitializer(new YouTubeRequestInitializer(youtubeDataApiKey))
 				.setApplicationName("ClassicalFinds")
 				.build();
-		List<Work> works = workService.getRandomSampling(1);
+		List<Work> works = workService.getRandomSampling(1000);
 		for(Work work: works) {
+			workVideoService.deleteForWork(work);
 			Composer composer = composerService.getById(work.getComposerId());
-			log.info("Got work '" + work.getTitle() + "' by '" + composer.getCompleteName() + "'");
+			log.info("Searching for performances of work '" + work.getTitle() + "' by '" + composer.getCompleteName() + "'");
 
 			String searchQuery = composer.getCompleteName() + " " + work.getTitle() + " " + work.getSubtitle();
 
-			System.out.println("Query: " + searchQuery);
 			YouTube.Search.List list = youTube.search().list(Arrays.asList("snippet"))
 					.setQ(searchQuery)
 					.setOrder("viewCount")
 					.setType(Arrays.asList("video"));
 			SearchListResponse response = list.execute();
 			if(response.getItems().isEmpty()) {
-				System.out.println("No results found!");
+				log.info("  No results found!");
+				log.info("");
 			} else {
+				int seq = 0;
 				for (SearchResult searchResult : response.getItems()) {
-					System.out.println("http://youtube.com/watch?v=" + searchResult.getId().getVideoId());
+					log.info("  " + searchResult.getSnippet().getTitle());
+					log.info("  http://youtube.com/watch?v=" + searchResult.getId().getVideoId());
+					log.info("");
+
+					WorkVideo workVideo = new WorkVideo();
+					workVideo.setWorkId(work.getId());
+					workVideo.setTitle(searchResult.getSnippet().getTitle());
+					workVideo.setDescription(searchResult.getSnippet().getDescription());
+					workVideo.setVideoId(searchResult.getId().getVideoId());
+					workVideo.setSortOrder(seq++);
+					workVideoService.insert(workVideo);
 				}
 			}
+
 		}
 	}
 }

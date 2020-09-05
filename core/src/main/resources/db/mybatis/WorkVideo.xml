@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.iw.cf.mybatis.WorkVideo">
+    <resultMap id="resultMap" type="com.iw.cf.core.dto.WorkVideo">
+        <id property="id" column="id" jdbcType="NUMERIC"/>
+        <result property="workId" column="work_id" jdbcType="NUMERIC"/>
+        <result property="title" column="title" jdbcType="VARCHAR"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="videoId" column="video_id" jdbcType="NUMERIC"/>
+        <result property="sortOrder" column="sort_order" jdbcType="NUMERIC"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.iw.cf.core.dto.WorkVideo"
+            useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO work_videos(work_id, title, description, video_id, sort_order)
+        VALUES (#{workId,jdbcType=NUMERIC},
+                #{title,jdbcType=VARCHAR},
+                #{description,jdbcType=VARCHAR},
+                #{videoId,jdbcType=VARCHAR},
+                #{sortOrder,jdbcType=NUMERIC})
+    </insert>
+
+    <delete id="deleteForWork" parameterType="Long">
+        DELETE
+        FROM work_videos
+        WHERE work_id = #{workId,jdbcType=NUMERIC}
+    </delete>
+</mapper>
