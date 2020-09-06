@@ -23,4 +23,12 @@ public class WorkVideoDao {
     public List<WorkVideo> getForWork(Long workId) {
         return sqlSession.selectList("com.iw.cf.mybatis.WorkVideo.getForWork", workId);
     }
+
+    public List<WorkVideo> getAll() {
+        return sqlSession.selectList("com.iw.cf.mybatis.WorkVideo.getAll");
+    }
+
+    public void update(WorkVideo workVideo) {
+        sqlSession.update("com.iw.cf.mybatis.WorkVideo.update", workVideo);
+    }
 }

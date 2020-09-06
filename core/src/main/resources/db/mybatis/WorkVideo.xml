@@ -20,7 +20,7 @@
                wv.description,
                wv.video_id,
                wv.sort_order
-          FROM work_videos wv
+        FROM work_videos wv
     </sql>
 
     <insert id="insert" parameterType="com.iw.cf.core.dto.WorkVideo"
@@ -40,8 +40,22 @@
     </delete>
 
     <select id="getForWork" parameterType="Long" resultMap="resultMap">
-        <include refid="selectFromSql" />
+        <include refid="selectFromSql"/>
         WHERE wv.work_id = #{workId,jdbcType=NUMERIC}
         ORDER BY wv.sort_order
     </select>
+
+
+    <select id="getAll" resultMap="resultMap">
+        <include refid="selectFromSql"/>
+    </select>
+
+    <update id="update" parameterType="com.iw.cf.core.dto.WorkVideo">
+        UPDATE work_videos
+        SET title       = #{title,jdbcType=VARCHAR},
+            description = #{description,jdbcType=VARCHAR},
+            video_id    = #{videoId,jdbcType=BOOLEAN},
+            sort_order  = #{sortOrder,jdbcType=BOOLEAN}
+        WHERE id = #{id,jdbcType=NUMERIC}
+    </update>
 </mapper>

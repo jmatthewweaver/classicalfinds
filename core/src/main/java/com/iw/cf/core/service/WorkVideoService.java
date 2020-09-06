@@ -25,4 +25,12 @@ public class WorkVideoService {
     public List<WorkVideo> getForWork(Long workId) {
         return workVideoDao.getForWork(workId);
     }
+
+    public List<WorkVideo> getAll() {
+        return workVideoDao.getAll();
+    }
+
+    public void update(WorkVideo workVideo) {
+        workVideoDao.update(workVideo);
+    }
 }

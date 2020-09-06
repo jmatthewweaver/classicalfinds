@@ -44,7 +44,6 @@ class BrowsePanel
                 }
             }}
             initialRoute={{id: 'home'}} />
-            <BrowseGenresPanel />
         </Ons.Page>
     }
 }

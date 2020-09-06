@@ -9,6 +9,7 @@
         <module name="core" />
         <module name="api" />
         <module name="worksearch" />
+        <module name="workdecoder" />
         <module name="ingestor" />
       </profile>
     </annotationProcessing>
@@ -16,6 +17,7 @@
       <module name="api" target="11" />
       <module name="core" target="11" />
       <module name="ingestor" target="11" />
+      <module name="workdecoder" target="11" />
       <module name="worksearch" target="11" />
     </bytecodeTargetLevel>
   </component>
@@ -24,6 +26,7 @@
       <module name="api" options="-parameters" />
       <module name="core" options="-parameters" />
       <module name="ingestor" options="-parameters" />
+      <module name="workdecoder" options="-parameters" />
       <module name="worksearch" options="-parameters" />
     </option>
   </component>

@@ -11,7 +11,7 @@
         <result property="popular" column="popular" jdbcType="BOOLEAN"/>
         <result property="recommended" column="recommended" jdbcType="BOOLEAN"/>
         <result property="genreId" column="genre_id" jdbcType="NUMERIC"/>
-        <result property="composerId" column="composer_id" jdbcType="NUMERIC" />
+        <result property="composerId" column="composer_id" jdbcType="NUMERIC"/>
     </resultMap>
 
     <sql id="selectFromSql">
@@ -47,13 +47,13 @@
     </delete>
 
     <select id="getRandomSampling" parameterType="Integer" resultMap="resultMap">
-        <include refid="selectFromSql" />
+        <include refid="selectFromSql"/>
         WHERE popular = TRUE
         ORDER BY RANDOM() LIMIT #{limit,jdbcType=NUMERIC}
     </select>
 
     <select id="search" parameterType="map" resultMap="resultMap">
-        <include refid="selectFromSql" />
+        <include refid="selectFromSql"/>
         <where>
             <if test="genreId != null">
                 AND w.genre_id = #{genreId,jdbcType=NUMERIC}
@@ -63,9 +63,24 @@
             </if>
             AND (
             SELECT COUNT(1)
-              FROM work_videos wv
-             WHERE wv.work_id = w.id) &lt;&gt; 0
+            FROM work_videos wv
+            WHERE wv.work_id = w.id) &lt;&gt; 0
         </where>
     </select>
+
+    <select id="getAll" resultMap="resultMap">
+        <include refid="selectFromSql"/>
+    </select>
+
+    <update id="update" parameterType="com.iw.cf.core.dto.Work">
+        UPDATE works
+        SET title       = #{title,jdbcType=VARCHAR},
+            subtitle    = #{subtitle,jdbcType=VARCHAR},
+            popular     = #{popular,jdbcType=BOOLEAN},
+            recommended = #{recommended,jdbcType=BOOLEAN},
+            genre_id    = #{genreId,jdbcType=NUMERIC},
+            composer_id = #{composerId,jdbcType=NUMERIC}
+        WHERE id = #{id,jdbcType=NUMERIC}
+    </update>
 
 </mapper>

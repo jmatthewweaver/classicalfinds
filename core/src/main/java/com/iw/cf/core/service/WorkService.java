@@ -28,4 +28,8 @@ public class WorkService {
     public List<Work> search(Long genreId, Long composerId) {
         return workDao.search(genreId, composerId);
     }
+
+    public List<Work> getAll() {
+        return workDao.getAll();
+    }
 }

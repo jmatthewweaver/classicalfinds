@@ -33,4 +33,8 @@ public class WorkDao {
         params.put("composerId", composerId);
         return sqlSession.selectList("com.iw.cf.mybatis.Work.search", params);
     }
+
+    public List<Work> getAll() {
+        return sqlSession.selectList("com.iw.cf.mybatis.Work.getAll");
+    }
 }
