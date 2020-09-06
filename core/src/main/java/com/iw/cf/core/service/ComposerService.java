@@ -5,6 +5,8 @@ import com.iw.cf.core.dto.Composer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ComposerService {
 
@@ -21,5 +23,9 @@ public class ComposerService {
 
     public Composer getById(Long id) {
         return composerDao.getById(id);
+    }
+
+    public List<Composer> getByGenre(Long genreId) {
+        return composerDao.getByGenre(genreId);
     }
 }

@@ -13,6 +13,16 @@
         <result property="sortOrder" column="sort_order" jdbcType="NUMERIC"/>
     </resultMap>
 
+    <sql id="selectFromSql">
+        SELECT wv.id,
+               wv.work_id,
+               wv.title,
+               wv.description,
+               wv.video_id,
+               wv.sort_order
+          FROM work_videos wv
+    </sql>
+
     <insert id="insert" parameterType="com.iw.cf.core.dto.WorkVideo"
             useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         INSERT INTO work_videos(work_id, title, description, video_id, sort_order)
@@ -28,4 +38,10 @@
         FROM work_videos
         WHERE work_id = #{workId,jdbcType=NUMERIC}
     </delete>
+
+    <select id="getForWork" parameterType="Long" resultMap="resultMap">
+        <include refid="selectFromSql" />
+        WHERE wv.work_id = #{workId,jdbcType=NUMERIC}
+        ORDER BY wv.sort_order
+    </select>
 </mapper>

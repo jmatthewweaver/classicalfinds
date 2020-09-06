@@ -5,7 +5,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class WorkDao {
@@ -23,5 +25,12 @@ public class WorkDao {
 
     public List<Work> getRandomSampling(int limit) {
         return sqlSession.selectList("com.iw.cf.mybatis.Work.getRandomSampling", limit);
+    }
+
+    public List<Work> search(Long genreId, Long composerId) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("genreId", genreId);
+        params.put("composerId", composerId);
+        return sqlSession.selectList("com.iw.cf.mybatis.Work.search", params);
     }
 }

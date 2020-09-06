@@ -1,17 +1,65 @@
 import React from 'react';
-import './App.css';
 import Context from './Context';
 import Ajax from "./Ajax";
-import GenreList from "./widgets/GenreList";
+import BrowsePanel from "./panels/BrowsePanel";
+import ViewVideoPanel from "./panels/ViewVideoPanel";
+
+let Ons = require('react-onsenui');
 
 export default class App
-extends React.Component {
+    extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            tabIndex: 0,
             context: {
-                genres: []
+                genres: [],
+                genreComposers: {},
+                updateGenreComposers: (genreId, composers) => {
+                    let newComposers = {};
+                    Object.assign(newComposers, this.state.context.genreComposers);
+                    newComposers[genreId] = composers;
+                    this.setState({
+                        context: {
+                            ...this.state.context,
+                            genreComposers: newComposers
+                        }
+                    })
+                },
+                genreComposerWorks: {},
+                updateGenreComposerWorks: (genreId, composerId, works) => {
+                    let newWorks = {};
+                    Object.assign(newWorks, this.state.context.genreComposerWorks);
+                    newWorks[genreId + '_' + composerId] = works;
+                    this.setState({
+                        context: {
+                            ...this.state.context,
+                            genreComposerWorks: newWorks
+                        }
+                    })
+                },
+                workVideos: {},
+                updateWorkVideos: (workId, workVideos) => {
+                    let newWorkVideos = {};
+                    Object.assign(newWorkVideos, this.state.context.workVideos);
+                    newWorkVideos[workId] = workVideos;
+                    this.setState({
+                        context: {
+                            ...this.state.context,
+                            workVideos: newWorkVideos
+                        }
+                    })
+                },
+                activeWork: null,
+                updateActiveWork: (work) => {
+                    this.setState({
+                        context: {
+                            ...this.state.context,
+                            activeWork: work
+                        }
+                    })
+                }
             }
         }
     }
@@ -30,7 +78,26 @@ extends React.Component {
     render() {
         return (
             <Context.Provider value={this.state.context}>
-                <GenreList />
+                <Ons.Page>
+                    <div style={{width: '100%', height: '100%', display: 'flex', flexFlow: 'column nowrap'}}>
+                        <div style={{flex: 1}}>
+                            <ViewVideoPanel />
+                        </div>
+                        <div style={{flex: 1, position: 'relative'}}>
+                            <Ons.Tabbar index={this.state.tabIndex}
+                                        onPostChange={e => this.setState({tabIndex: e.activeIndex})}
+                                        position="bottom"
+                                        renderTabs={() => [
+                                            {
+                                                content: <BrowsePanel key="browsePage" />,
+                                                tab: <Ons.Tab key="browseTab" label="Browse" icon="fa-list" />
+                                            }
+                                        ]}>
+
+                            </Ons.Tabbar>
+                        </div>
+                    </div>
+                </Ons.Page>
             </Context.Provider>
         );
     }

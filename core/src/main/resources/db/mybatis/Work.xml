@@ -52,4 +52,20 @@
         ORDER BY RANDOM() LIMIT #{limit,jdbcType=NUMERIC}
     </select>
 
+    <select id="search" parameterType="map" resultMap="resultMap">
+        <include refid="selectFromSql" />
+        <where>
+            <if test="genreId != null">
+                AND w.genre_id = #{genreId,jdbcType=NUMERIC}
+            </if>
+            <if test="composerId != null">
+                AND w.composer_id = #{composerId,jdbcType=NUMERIC}
+            </if>
+            AND (
+            SELECT COUNT(1)
+              FROM work_videos wv
+             WHERE wv.work_id = w.id) &lt;&gt; 0
+        </where>
+    </select>
+
 </mapper>

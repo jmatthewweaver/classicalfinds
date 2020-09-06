@@ -58,4 +58,15 @@
         <include refid="selectFromSql" />
         WHERE id = #{id,jdbcType=NUMERIC}
     </select>
+
+    <select id="getByGenre" parameterType="Long" resultMap="resultMap">
+        <include refid="selectFromSql" />
+        WHERE (
+            SELECT COUNT(1)
+              FROM works w
+              JOIN work_videos wv ON wv.work_id = w.id
+             WHERE w.genre_id = #{genreId,jdbcType=NUMERIC}
+               AND w.composer_id = c.id) &lt;&gt; 0
+        ORDER BY UPPER(c.name)
+    </select>
 </mapper>

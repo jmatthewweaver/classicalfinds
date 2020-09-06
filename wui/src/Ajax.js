@@ -14,4 +14,25 @@ export default class Ajax {
             method: 'GET'
         })
     }
+
+    static getGenreComposers(genreId) {
+        return axios.request({
+            url: Ajax.buildUrl(['genres', genreId, 'composers']),
+            method: 'GET'
+        })
+    }
+
+    static getGenreComposerWorks(genreId, composerId) {
+        return axios.request({
+            url: Ajax.buildUrl(['genres', genreId, 'composers', composerId, "works"]),
+            method: 'GET'
+        })
+    }
+
+    static getWorkVideos(workId) {
+        return axios.request({
+            url: Ajax.buildUrl(['works', workId, 'videos']),
+            method: 'GET'
+        })
+    }
 }

@@ -6,6 +6,8 @@ import com.iw.cf.core.dto.WorkVideo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class WorkVideoService {
 
@@ -18,5 +20,9 @@ public class WorkVideoService {
 
     public void deleteForWork(Work work) {
         workVideoDao.deleteForWork(work.getId());
+    }
+
+    public List<WorkVideo> getForWork(Long workId) {
+        return workVideoDao.getForWork(workId);
     }
 }

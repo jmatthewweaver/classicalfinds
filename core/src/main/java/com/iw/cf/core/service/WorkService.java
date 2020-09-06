@@ -24,4 +24,8 @@ public class WorkService {
     public List<Work> getRandomSampling(int limit) {
         return workDao.getRandomSampling(limit);
     }
+
+    public List<Work> search(Long genreId, Long composerId) {
+        return workDao.search(genreId, composerId);
+    }
 }

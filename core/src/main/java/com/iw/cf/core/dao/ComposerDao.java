@@ -5,6 +5,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class ComposerDao {
 
@@ -21,5 +23,9 @@ public class ComposerDao {
 
     public Composer getById(Long id) {
         return sqlSession.selectOne("com.iw.cf.mybatis.Composer.getById", id);
+    }
+
+    public List<Composer> getByGenre(Long genreId) {
+        return sqlSession.selectList("com.iw.cf.mybatis.Composer.getByGenre", genreId);
     }
 }

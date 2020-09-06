@@ -5,6 +5,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class WorkVideoDao {
     @Autowired
@@ -16,5 +18,9 @@ public class WorkVideoDao {
 
     public void deleteForWork(Long workId) {
         sqlSession.delete("com.iw.cf.mybatis.WorkVideo.deleteForWork", workId);
+    }
+
+    public List<WorkVideo> getForWork(Long workId) {
+        return sqlSession.selectList("com.iw.cf.mybatis.WorkVideo.getForWork", workId);
     }
 }
