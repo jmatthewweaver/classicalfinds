@@ -7,7 +7,28 @@
     margin-right: 0.5em;
 }
 
-.list-item.active {
+.list-item.list-item.active {
     color: #fff;
     background-color: #444;
 }
+
+.viewVideoPanel {
+    background: url('background.jpg');
+    background-size: cover;
+}
+
+.page__background.page__background,
+.page--material__background.page--material__background,
+.list.list {
+    background-color: #444;
+}
+
+.list-item.list-item {
+    background-color: #fff;
+}
+
+.workVideoList .list-item > .center {
+    flex-wrap: nowrap;
+    width: 100%
+}
+

@@ -20,11 +20,6 @@ class BrowseGenreComposerWorksPanel
             display: 'flex',
             flexFlow: 'column nowrap'
         }}>
-            <Ons.Button icon="fa-arrow-left" onClick={() => this.props.navigator.popPage()}
-                        className="backButton" style={{flex: 'none'}}>
-                Back
-            </Ons.Button>
-
             <Ons.List dataSource={this.context.genreComposerWorks[this.props.genreId + '_' + this.props.composerId]}
                       style={{flex: 1, overflow: 'auto'}}
                       renderRow={(item) => <Ons.ListItem key={item.id} modifier="chevron"
@@ -37,6 +32,11 @@ class BrowseGenreComposerWorksPanel
                           {item.title}
                       </Ons.ListItem>}
             />
+            <Ons.Button icon="fa-arrow-left" onClick={() => this.props.navigator.popPage()}
+                        className="backButton" style={{flex: 'none'}}>
+                Back
+            </Ons.Button>
+
         </div>
     }
 }

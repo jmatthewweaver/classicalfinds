@@ -12,11 +12,18 @@ class ViewVideoPanel
         return <div style={{
             height: '100%',
             display: 'flex',
-            flexFlow: 'row nowrap',
+            flexFlow: 'column nowrap',
             alignItems: 'center',
             justifyContent: 'center'
         }}>
-            <iframe src={'http://www.youtube.com/embed/' + this.context.activeWork.videoId + "?autoplay=1"}/>
+            <div style={{flex: 1, color: '#fff'}}>
+                <h1 style={{paddingLeft: '1em', paddingRight: '1em', fontSize: '24px'}}>{this.context.activeWork.title}</h1>
+                <p style={{paddingLeft: '1em', paddingRight: '1em'}}>{this.context.activeWork.description}</p>
+            </div>
+            <div style={{flex: 1, padding: '1em'}}>
+            <iframe src={'http://www.youtube.com/embed/' + this.context.activeWork.videoId + "?autoplay=1"}
+                    style={{height: '100%', width: 'auto'}}/>
+            </div>
         </div>
     }
 }

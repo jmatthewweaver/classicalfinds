@@ -122,7 +122,7 @@ export default class App
             <Context.Provider value={this.state.context}>
                 <Ons.Page>
                     <div style={{width: '100%', height: '100%', display: 'flex', flexFlow: 'column nowrap'}}>
-                        <div style={{flex: 1}}>
+                        <div style={{flex: 1}} className="viewVideoPanel">
                             <ViewVideoPanel />
                         </div>
                         <div style={{flex: 1, position: 'relative'}}>
