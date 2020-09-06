@@ -46,10 +46,10 @@
         FROM works
     </delete>
 
-    <select id="getRandomSampling" parameterType="Integer" resultMap="resultMap">
+    <select id="getWorksToProcess" parameterType="Integer" resultMap="resultMap">
         <include refid="selectFromSql"/>
-        WHERE popular = TRUE
-        ORDER BY RANDOM() LIMIT #{limit,jdbcType=NUMERIC}
+        WHERE (SELECT COUNT(1) FROM work_videos wv WHERE wv.work_id = w.id) = 0
+        ORDER BY popular DESC, recommended DESC, RANDOM()
     </select>
 
     <select id="search" parameterType="map" resultMap="resultMap">

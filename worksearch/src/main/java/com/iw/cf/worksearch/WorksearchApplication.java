@@ -58,7 +58,7 @@ implements CommandLineRunner {
 				.setYouTubeRequestInitializer(new YouTubeRequestInitializer(youtubeDataApiKey))
 				.setApplicationName("ClassicalFinds")
 				.build();
-		List<Work> works = workService.getRandomSampling(1000);
+		List<Work> works = workService.getWorksToProcess();
 		for(Work work: works) {
 			workVideoService.deleteForWork(work);
 			Composer composer = composerService.getById(work.getComposerId());

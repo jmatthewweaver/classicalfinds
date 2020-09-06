@@ -21,8 +21,8 @@ public class WorkService {
         workDao.deleteAll();
     }
 
-    public List<Work> getRandomSampling(int limit) {
-        return workDao.getRandomSampling(limit);
+    public List<Work> getWorksToProcess() {
+        return workDao.getWorksToProcess();
     }
 
     public List<Work> search(Long genreId, Long composerId) {

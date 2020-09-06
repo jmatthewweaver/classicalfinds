@@ -23,8 +23,8 @@ public class WorkDao {
         sqlSession.delete("com.iw.cf.mybatis.Work.deleteAll");
     }
 
-    public List<Work> getRandomSampling(int limit) {
-        return sqlSession.selectList("com.iw.cf.mybatis.Work.getRandomSampling", limit);
+    public List<Work> getWorksToProcess() {
+        return sqlSession.selectList("com.iw.cf.mybatis.Work.getWorksToProcess");
     }
 
     public List<Work> search(Long genreId, Long composerId) {
