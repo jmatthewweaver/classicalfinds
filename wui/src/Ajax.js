@@ -35,4 +35,33 @@ export default class Ajax {
             method: 'GET'
         })
     }
+
+    static getEras() {
+        return axios.request({
+            url: Ajax.buildUrl(['eras']),
+            method: 'GET'
+        })
+    }
+
+    static getEraComposers(eraId) {
+        return axios.request({
+            url: Ajax.buildUrl(['eras', eraId, 'composers']),
+            method: 'GET'
+        })
+    }
+
+    static getComposers() {
+        return axios.request({
+            url: Ajax.buildUrl(['composers']),
+            method: 'GET'
+        })
+    }
+
+    static getComposerWorks(composerId) {
+        return axios.request({
+            url: Ajax.buildUrl(['composers', composerId, 'works']),
+            method: 'GET'
+        })
+    }
+
 }

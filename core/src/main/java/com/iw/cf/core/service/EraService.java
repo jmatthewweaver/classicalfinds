@@ -5,6 +5,8 @@ import com.iw.cf.core.dto.Era;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class EraService {
 
@@ -17,5 +19,13 @@ public class EraService {
 
     public void deleteAll() {
         eraDao.deleteAll();
+    }
+
+    public List<Era> getAll() {
+        return eraDao.getAll();
+    }
+
+    public List<Era> getWithVideos() {
+        return eraDao.getWithVideos();
     }
 }

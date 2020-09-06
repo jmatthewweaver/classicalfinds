@@ -5,6 +5,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class EraDao {
 
@@ -17,5 +19,13 @@ public class EraDao {
 
     public void deleteAll() {
         sqlSession.delete("com.iw.cf.mybatis.Era.deleteAll");
+    }
+
+    public List<Era> getAll() {
+        return sqlSession.selectList("com.iw.cf.mybatis.Era.getAll");
+    }
+
+    public List<Era> getWithVideos() {
+        return sqlSession.selectList("com.iw.cf.mybatis.Era.getWithVideos");
     }
 }

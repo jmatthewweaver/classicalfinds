@@ -28,4 +28,12 @@ public class ComposerService {
     public List<Composer> getByGenre(Long genreId) {
         return composerDao.getByGenre(genreId);
     }
+
+    public List<Composer> getByEra(Long eraId) {
+        return composerDao.getByEra(eraId);
+    }
+
+    public List<Composer> getWithVideos() {
+        return composerDao.getWithVideos();
+    }
 }

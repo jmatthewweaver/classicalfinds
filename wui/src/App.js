@@ -59,6 +59,32 @@ export default class App
                             activeWork: work
                         }
                     })
+                },
+                eras: [],
+                eraComposers: {},
+                updateEraComposers: (eraId, composers) => {
+                    let newComposers = {};
+                    Object.assign(newComposers, this.state.context.eraComposers);
+                    newComposers[eraId] = composers;
+                    this.setState({
+                        context: {
+                            ...this.state.context,
+                            eraComposers: newComposers
+                        }
+                    })
+                },
+                composers: [],
+                composerWorks: {},
+                updateComposerWorks: (composerId, works) => {
+                    let newWorks = {};
+                    Object.assign(newWorks, this.state.context.composerWorks);
+                    newWorks[composerId] = works;
+                    this.setState({
+                        context: {
+                            ...this.state.context,
+                            composerWorks: newWorks
+                        }
+                    })
                 }
             }
         }
@@ -73,6 +99,22 @@ export default class App
                 }
             })
         });
+        Ajax.getEras().then(resp => {
+            this.setState({
+                context: {
+                    ...this.state.context,
+                    eras: resp.data
+                }
+            })
+        });
+        Ajax.getComposers().then(resp => {
+            this.setState({
+                context: {
+                    ...this.state.context,
+                    composers: resp.data
+                }
+            })
+        })
     }
 
     render() {

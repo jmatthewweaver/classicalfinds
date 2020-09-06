@@ -28,4 +28,12 @@ public class ComposerDao {
     public List<Composer> getByGenre(Long genreId) {
         return sqlSession.selectList("com.iw.cf.mybatis.Composer.getByGenre", genreId);
     }
+
+    public List<Composer> getByEra(Long eraId) {
+        return sqlSession.selectList("com.iw.cf.mybatis.Composer.getByEra", eraId);
+    }
+
+    public List<Composer> getWithVideos() {
+        return sqlSession.selectList("com.iw.cf.mybatis.Composer.getWithVideos");
+    }
 }

@@ -4,13 +4,13 @@ import Ajax from "../Ajax";
 
 let Ons = require('react-onsenui');
 
-class BrowseGenreComposerWorksPanel
+class BrowseComposerWorksPanel
     extends React.Component {
 
     componentDidMount() {
-        Ajax.getGenreComposerWorks(this.props.genreId, this.props.composerId)
+        Ajax.getComposerWorks(this.props.composerId)
             .then(resp => {
-                this.context.updateGenreComposerWorks(this.props.genreId, this.props.composerId, resp.data);
+                this.context.updateComposerWorks(this.props.composerId, resp.data);
             })
     }
 
@@ -25,7 +25,7 @@ class BrowseGenreComposerWorksPanel
                 Back
             </Ons.Button>
 
-            <Ons.List dataSource={this.context.genreComposerWorks[this.props.genreId + '_' + this.props.composerId]}
+            <Ons.List dataSource={this.context.composerWorks[this.props.composerId]}
                       style={{flex: 1, overflow: 'auto'}}
                       renderRow={(item) => <Ons.ListItem key={item.id} modifier="chevron"
                       onClick={() => {
@@ -41,5 +41,5 @@ class BrowseGenreComposerWorksPanel
     }
 }
 
-BrowseGenreComposerWorksPanel.contextType = Context;
-export default BrowseGenreComposerWorksPanel;
+BrowseComposerWorksPanel.contextType = Context;
+export default BrowseComposerWorksPanel;

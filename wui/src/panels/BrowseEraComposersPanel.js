@@ -4,13 +4,13 @@ import Ajax from "../Ajax";
 
 let Ons = require('react-onsenui');
 
-class BrowseGenreComposerWorksPanel
+class BrowseEraComposersPanel
     extends React.Component {
 
     componentDidMount() {
-        Ajax.getGenreComposerWorks(this.props.genreId, this.props.composerId)
+        Ajax.getEraComposers(this.props.eraId)
             .then(resp => {
-                this.context.updateGenreComposerWorks(this.props.genreId, this.props.composerId, resp.data);
+                this.context.updateEraComposers(this.props.eraId, resp.data);
             })
     }
 
@@ -25,21 +25,20 @@ class BrowseGenreComposerWorksPanel
                 Back
             </Ons.Button>
 
-            <Ons.List dataSource={this.context.genreComposerWorks[this.props.genreId + '_' + this.props.composerId]}
+            <Ons.List dataSource={this.context.eraComposers[this.props.eraId]}
                       style={{flex: 1, overflow: 'auto'}}
                       renderRow={(item) => <Ons.ListItem key={item.id} modifier="chevron"
-                      onClick={() => {
-                          this.props.navigator.pushPage({
-                              id: 'work',
-                              workId: item.id
-                          })
-                      }}>
-                          {item.title}
+                                                         onClick={() =>
+                                                             this.props.navigator.pushPage({
+                                                                 id: 'composerWorks',
+                                                                 composerId: item.id
+                                                             })}>
+                          {item.name}
                       </Ons.ListItem>}
             />
         </div>
     }
 }
 
-BrowseGenreComposerWorksPanel.contextType = Context;
-export default BrowseGenreComposerWorksPanel;
+BrowseEraComposersPanel.contextType = Context;
+export default BrowseEraComposersPanel;

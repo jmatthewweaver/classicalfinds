@@ -4,6 +4,10 @@ import BrowseHomePanel from "./BrowseHomePanel";
 import BrowseGenreComposersPanel from "./BrowseGenreComposersPanel";
 import BrowseGenreComposerWorksPanel from "./BrowseGenreComposerWorksPanel";
 import WorkPanel from "./WorkPanel";
+import BrowseErasPanel from "./BrowseErasPanel";
+import BrowseEraComposersPanel from "./BrowseEraComposersPanel";
+import BrowseComposersPanel from "./BrowseComposersPanel";
+import BrowseComposerWorksPanel from "./BrowseComposerWorksPanel";
 
 let Ons = require('react-onsenui');
 
@@ -32,6 +36,26 @@ class BrowsePanel
                     case 'genreComposerWorks':
                         return <Ons.Page key="browseGenreComposerWorks">
                             <BrowseGenreComposerWorksPanel genreId={route.genreId} composerId={route.composerId} navigator={navigator} />
+                        </Ons.Page>
+
+                    case 'eras':
+                        return <Ons.Page key="browseEras">
+                            <BrowseErasPanel navigator={navigator} />
+                        </Ons.Page>
+
+                    case 'eraComposers':
+                        return <Ons.Page key="browseEraComposers">
+                            <BrowseEraComposersPanel eraId={route.eraId} navigator={navigator} />
+                        </Ons.Page>
+
+                    case 'composers':
+                        return <Ons.Page key="browseComposers">
+                            <BrowseComposersPanel navigator={navigator} />
+                        </Ons.Page>
+
+                    case 'composerWorks':
+                        return <Ons.Page key="browseComposerWorks">
+                            <BrowseComposerWorksPanel composerId={route.composerId} navigator={navigator} />
                         </Ons.Page>
 
                     case 'work':

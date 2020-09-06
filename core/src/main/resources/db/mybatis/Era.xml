@@ -7,8 +7,15 @@
     <resultMap id="resultMap" type="com.iw.cf.core.dto.Era">
         <id property="id" column="id" jdbcType="NUMERIC"/>
         <result property="name" column="name" jdbcType="VARCHAR"/>
-        <result property="sortOrder" column="sort_order" jdbcType="NUMERIC" />
+        <result property="sortOrder" column="sort_order" jdbcType="NUMERIC"/>
     </resultMap>
+
+    <sql id="selectFromSql">
+        SELECT e.id,
+               e.name,
+               e.sort_order
+        FROM eras e
+    </sql>
 
     <insert id="insert" parameterType="com.iw.cf.core.dto.Era"
             useGeneratedKeys="true" keyColumn="id" keyProperty="id">
@@ -17,7 +24,22 @@
     </insert>
 
     <delete id="deleteAll">
-        DELETE FROM eras
+        DELETE
+        FROM eras
     </delete>
 
+    <select id="getAll" resultMap="resultMap">
+        <include refid="selectFromSql"/>
+        ORDER BY e.sort_order ASC
+    </select>
+
+    <select id="getWithVideos" resultMap="resultMap">
+        <include refid="selectFromSql"/>
+        WHERE (SELECT COUNT(1)
+        FROM work_videos wv
+        JOIN works w ON w.id = wv.work_id
+        JOIN composers c ON c.id = w.composer_id
+        WHERE c.era_id = e.id) &lt;&gt; 0
+        ORDER BY e.sort_order ASC
+    </select>
 </mapper>
