@@ -85,4 +85,15 @@ export default class Ajax {
         })
     }
 
+    static search(query, cancelToken) {
+        return axios.request({
+            url: Ajax.buildUrl(['search']),
+            params: {
+                q: query
+            },
+            cancelToken,
+            method: 'GET'
+        })
+    }
+
 }

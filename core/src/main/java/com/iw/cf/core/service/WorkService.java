@@ -25,8 +25,8 @@ public class WorkService {
         return workDao.getWorksToProcess();
     }
 
-    public List<Work> search(Long formId, Long genreId, Long composerId) {
-        return workDao.search(formId, genreId, composerId);
+    public List<Work> search(String query, Long formId, Long genreId, Long composerId) {
+        return workDao.search(query, formId, genreId, composerId);
     }
 
     public List<Work> getAll() {

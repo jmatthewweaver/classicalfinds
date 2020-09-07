@@ -101,4 +101,16 @@
         AND w.composer_id = c.id) &lt;&gt; 0
         ORDER BY popular DESC, recommended DESC, UPPER(c.name)
     </select>
+
+    <select id="search" parameterType="String" resultMap="resultMap">
+        <include refid="selectFromSql"/>
+        WHERE (
+        SELECT COUNT(1)
+        FROM works w
+        JOIN work_videos wv ON wv.work_id = w.id
+        AND w.composer_id = c.id) &lt;&gt; 0
+        AND (UPPER(c.name) LIKE '%' || UPPER(#{query,jdbcType=VARCHAR}) || '%' OR
+        UPPER(c.complete_name) LIKE '%' || UPPER(#{query,jdbcType=VARCHAR}) || '%')
+        ORDER BY popular DESC, recommended DESC, UPPER(c.name)
+    </select>
 </mapper>

@@ -1,21 +1,18 @@
 package com.iw.cf.api.controller;
 
-import com.iw.cf.core.dto.Composer;
-import com.iw.cf.core.dto.Work;
+import com.iw.cf.api.dto.SearchResults;
 import com.iw.cf.core.service.ComposerService;
 import com.iw.cf.core.service.WorkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.List;
-
 @Controller
-@RequestMapping(value = "/composers")
-public class ComposerController {
+@RequestMapping(value = "/search")
+public class SearchController {
 
     @Autowired
     private ComposerService composerService;
@@ -25,13 +22,12 @@ public class ComposerController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     @ResponseBody
-    public List<Composer> getComposers() {
-        return composerService.getWithVideos();
-    }
+    public SearchResults search(@RequestParam("q") String query) {
+        SearchResults searchResults = new SearchResults();
 
-    @RequestMapping(value = "/{composerId}/works", method = RequestMethod.GET)
-    @ResponseBody
-    public List<Work> getComposerWorks(@PathVariable("composerId") Long composerId) {
-        return workService.search(null, null, null, composerId);
+        searchResults.setComposers(composerService.search(query));
+        searchResults.setWorks(workService.search(query, null, null, null));
+
+        return searchResults;
     }
 }

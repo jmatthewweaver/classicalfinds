@@ -41,4 +41,7 @@ public class ComposerDao {
         return sqlSession.selectList("com.iw.cf.mybatis.Composer.getWithVideos");
     }
 
+    public List<Composer> search(String query) {
+        return sqlSession.selectList("com.iw.cf.mybatis.Composer.search", query);
+    }
 }

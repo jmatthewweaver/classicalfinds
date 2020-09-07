@@ -40,4 +40,8 @@ public class ComposerService {
     public List<Composer> getByForm(Long formId) {
         return composerDao.getByForm(formId);
     }
+
+    public List<Composer> search(String query) {
+        return composerDao.search(query);
+    }
 }

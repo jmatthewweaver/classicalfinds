@@ -3,6 +3,7 @@ import Context from './Context';
 import Ajax from "./Ajax";
 import BrowsePanel from "./panels/BrowsePanel";
 import ViewVideoPanel from "./panels/ViewVideoPanel";
+import SearchPanel from "./panels/SearchPanel";
 
 let Ons = require('react-onsenui');
 
@@ -166,6 +167,10 @@ export default class App
                                             {
                                                 content: <BrowsePanel key="browsePage" />,
                                                 tab: <Ons.Tab key="browseTab" label="Browse" icon="fa-list" />
+                                            },
+                                            {
+                                                content: <SearchPanel key="searchPage" />,
+                                                tab: <Ons.Tab key="searchTab" label="Search" icon="fa-search" />
                                             }
                                         ]}>
 

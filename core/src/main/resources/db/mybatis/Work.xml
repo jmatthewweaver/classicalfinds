@@ -55,6 +55,9 @@
     <select id="search" parameterType="map" resultMap="resultMap">
         <include refid="selectFromSql"/>
         <where>
+            <if test="query != null">
+                AND UPPER(w.title) LIKE '%' || UPPER(#{query,jdbcType=VARCHAR}) || '%'
+            </if>
             <if test="formId != null">
                 AND w.form_id = #{formId,jdbcType=NUMERIC}
             </if>

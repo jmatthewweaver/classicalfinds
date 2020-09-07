@@ -26,13 +26,13 @@ class WorkPanel
             flexFlow: 'column nowrap'
         }}>
             <div style={{flex: 1, display: 'flex', alignContent: 'center', justifyContent: 'center'}}>
-                <div>
+                <div style={{width: '100%'}}>
                     <Ons.List dataSource={this.context.workVideos[this.props.workId]}
                               className="workVideoList"
                               modifier="inset"
                               style={{
-                                  width: '50%',
-                                  marginLeft: '25%',
+                                  width: '80%',
+                                  marginLeft: '10%',
                                   marginTop: '1em'
                               }}
                               renderRow={(item) => <Ons.ListItem key={item.id}

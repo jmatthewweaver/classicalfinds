@@ -43,6 +43,6 @@ public class FormController {
     @RequestMapping(value = "/{formId}/composers/{composerId}/works", method = RequestMethod.GET)
     @ResponseBody
     public List<Work> getByFormAndComposer(@PathVariable("formId") Long formId, @PathVariable("composerId") Long composerId) {
-        return workService.search(formId, null, composerId);
+        return workService.search(null, formId, null, composerId);
     }
 }
