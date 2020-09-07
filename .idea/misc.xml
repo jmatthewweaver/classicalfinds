@@ -11,6 +11,7 @@
         <option value="$PROJECT_DIR$/ingestor/pom.xml" />
         <option value="$PROJECT_DIR$/worksearch/pom.xml" />
         <option value="$PROJECT_DIR$/workdecoder/pom.xml" />
+        <option value="$PROJECT_DIR$/formfinder/pom.xml" />
       </list>
     </option>
   </component>

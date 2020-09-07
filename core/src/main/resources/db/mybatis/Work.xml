@@ -79,8 +79,14 @@
             popular     = #{popular,jdbcType=BOOLEAN},
             recommended = #{recommended,jdbcType=BOOLEAN},
             genre_id    = #{genreId,jdbcType=NUMERIC},
-            composer_id = #{composerId,jdbcType=NUMERIC}
+            composer_id = #{composerId,jdbcType=NUMERIC},
+            form_id     = #{formId,jdbcType=NUMERIC}
         WHERE id = #{id,jdbcType=NUMERIC}
+    </update>
+
+    <update id="clearForms">
+        UPDATE works
+        SET form_id = NULL;
     </update>
 
 </mapper>

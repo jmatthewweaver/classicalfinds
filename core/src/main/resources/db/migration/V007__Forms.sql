@@ -1,0 +1,8 @@
+CREATE TABLE forms
+(
+    id   SERIAL PRIMARY KEY NOT NULL,
+    name VARCHAR(100)
+);
+
+ALTER TABLE works
+    ADD COLUMN form_id BIGINT REFERENCES forms (id);

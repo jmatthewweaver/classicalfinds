@@ -37,4 +37,12 @@ public class WorkDao {
     public List<Work> getAll() {
         return sqlSession.selectList("com.iw.cf.mybatis.Work.getAll");
     }
+
+    public void update(Work work) {
+        sqlSession.update("com.iw.cf.mybatis.Work.update", work);
+    }
+
+    public void clearForms() {
+        sqlSession.update("com.iw.cf.mybatis.Work.clearForms");
+    }
 }

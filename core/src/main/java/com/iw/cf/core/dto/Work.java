@@ -14,4 +14,5 @@ implements Serializable {
     private Boolean recommended;
     private Long genreId;
     private Long composerId;
+    private Long formId;
 }

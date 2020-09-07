@@ -32,4 +32,12 @@ public class WorkService {
     public List<Work> getAll() {
         return workDao.getAll();
     }
+
+    public void clearForms() {
+        workDao.clearForms();
+    }
+
+    public void update(Work work) {
+        workDao.update(work);
+    }
 }

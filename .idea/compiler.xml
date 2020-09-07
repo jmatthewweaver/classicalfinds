@@ -12,11 +12,13 @@
         <module name="worksearch" />
         <module name="workdecoder" />
         <module name="ingestor" />
+        <module name="formfinder" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="api" target="11" />
       <module name="core" target="11" />
+      <module name="formfinder" target="11" />
       <module name="ingestor" target="11" />
       <module name="workdecoder" target="11" />
       <module name="worksearch" target="11" />
@@ -26,6 +28,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="api" options="-parameters" />
       <module name="core" options="-parameters" />
+      <module name="formfinder" options="-parameters" />
       <module name="ingestor" options="-parameters" />
       <module name="workdecoder" options="-parameters" />
       <module name="worksearch" options="-parameters" />
