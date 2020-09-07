@@ -21,6 +21,10 @@
         FROM works w
         JOIN work_videos wv ON wv.work_id = w.id
         WHERE w.form_id = f.id) &lt;&gt; 0
+        ORDER BY CASE WHEN f.name = 'Other' THEN 1 ELSE 0 END,
+        CASE WHEN f.name = 'Concerto' THEN 'CZ'
+        WHEN f.name LIKE '%Concerto' THEN UPPER('Concerto ' || f.name) ELSE
+        UPPER(f.name) END
     </select>
 
     <insert id="insert" parameterType="com.iw.cf.core.dto.Form"

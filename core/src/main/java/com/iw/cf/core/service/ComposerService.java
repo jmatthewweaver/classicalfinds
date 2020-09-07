@@ -36,4 +36,8 @@ public class ComposerService {
     public List<Composer> getWithVideos() {
         return composerDao.getWithVideos();
     }
+
+    public List<Composer> getByForm(Long formId) {
+        return composerDao.getByForm(formId);
+    }
 }

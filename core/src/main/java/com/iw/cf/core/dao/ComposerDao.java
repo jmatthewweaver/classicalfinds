@@ -33,7 +33,12 @@ public class ComposerDao {
         return sqlSession.selectList("com.iw.cf.mybatis.Composer.getByEra", eraId);
     }
 
+    public List<Composer> getByForm(Long formId) {
+        return sqlSession.selectList("com.iw.cf.mybatis.Composer.getByForm", formId);
+    }
+
     public List<Composer> getWithVideos() {
         return sqlSession.selectList("com.iw.cf.mybatis.Composer.getWithVideos");
     }
+
 }

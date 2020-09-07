@@ -8,6 +8,10 @@ class BrowseHomePanel
     render() {
         let pages = [
             {
+                name: 'By Form',
+                id: 'forms'
+            },
+            {
                 name: 'By Composer',
                 id: 'composers'
             },

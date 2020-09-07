@@ -73,6 +73,31 @@ export default class App
                         }
                     })
                 },
+                forms: [],
+                formComposers: {},
+                updateFormComposers: (formId, composers) => {
+                    let newComposers = { };
+                    Object.assign(newComposers, this.state.context.formComposers);
+                    newComposers[formId] = composers;
+                    this.setState({
+                        context: {
+                            ...this.state.context,
+                            formComposers: newComposers
+                        }
+                    })
+                },
+                formComposerWorks: {},
+                updateFormComposerWorks: (formId, composerId, works) => {
+                    let newWorks = {};
+                    Object.assign(newWorks, this.state.context.formComposerWorks);
+                    newWorks[formId + '_' + composerId] = works;
+                    this.setState({
+                        context: {
+                            ...this.state.context,
+                            formComposerWorks: newWorks
+                        }
+                    })
+                },
                 composers: [],
                 composerWorks: {},
                 updateComposerWorks: (composerId, works) => {
@@ -112,6 +137,14 @@ export default class App
                 context: {
                     ...this.state.context,
                     composers: resp.data
+                }
+            })
+        });
+        Ajax.getForms().then(resp => {
+            this.setState({
+                context: {
+                    ...this.state.context,
+                    forms: resp.data
                 }
             })
         })

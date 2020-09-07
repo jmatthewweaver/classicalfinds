@@ -43,6 +43,6 @@ public class GenreController {
     @RequestMapping(value = "/{genreId}/composers/{composerId}/works", method = RequestMethod.GET)
     @ResponseBody
     public List<Work> getByGenreAndComposer(@PathVariable("genreId") Long genreId, @PathVariable("composerId") Long composerId) {
-        return workService.search(genreId, composerId);
+        return workService.search(null, genreId, composerId);
     }
 }

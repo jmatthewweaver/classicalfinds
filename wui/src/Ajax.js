@@ -64,4 +64,25 @@ export default class Ajax {
         })
     }
 
+    static getForms() {
+        return axios.request({
+            url: Ajax.buildUrl(['forms']),
+            method: 'GET'
+        })
+    }
+
+    static getFormComposers(formId) {
+        return axios.request({
+            url: Ajax.buildUrl(['forms', formId, 'composers']),
+            method: 'GET'
+        })
+    }
+
+    static getFormComposerWorks(formId, composerId) {
+        return axios.request({
+            url: Ajax.buildUrl(['forms', formId, 'composers', composerId, 'works']),
+            method: 'GET'
+        })
+    }
+
 }

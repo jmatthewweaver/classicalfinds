@@ -81,6 +81,17 @@
         ORDER BY popular DESC, recommended DESC, UPPER(c.name)
     </select>
 
+    <select id="getByForm" parameterType="Long" resultMap="resultMap">
+        <include refid="selectFromSql" />
+        WHERE (
+        SELECT COUNT(1)
+        FROM works w
+        JOIN work_videos wv ON wv.work_id = w.id
+        WHERE w.form_id = #{formId,jdbcType=NUMERIC}
+        AND w.composer_id = c.id) &lt;&gt; 0
+        ORDER BY popular DESC, recommended DESC, UPPER(c.name)
+    </select>
+
     <select id="getWithVideos" resultMap="resultMap">
         <include refid="selectFromSql"/>
         WHERE (

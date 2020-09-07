@@ -8,6 +8,9 @@ import BrowseErasPanel from "./BrowseErasPanel";
 import BrowseEraComposersPanel from "./BrowseEraComposersPanel";
 import BrowseComposersPanel from "./BrowseComposersPanel";
 import BrowseComposerWorksPanel from "./BrowseComposerWorksPanel";
+import BrowseFormsPanel from "./BrowseFormsPanel";
+import BrowseFormComposersPanel from "./BrowseFormComposersPanel";
+import BrowseFormComposerWorksPanel from "./BrowseFormComposerWorksPanel";
 
 let Ons = require('react-onsenui');
 
@@ -61,6 +64,21 @@ class BrowsePanel
                     case 'work':
                         return <Ons.Page key="browseWork">
                             <WorkPanel workId={route.workId} navigator={navigator} />
+                        </Ons.Page>
+
+                    case 'forms':
+                        return <Ons.Page key="browseForms">
+                            <BrowseFormsPanel navigator={navigator} />
+                        </Ons.Page>
+
+                    case 'formComposers':
+                        return <Ons.Page key="formComposers">
+                            <BrowseFormComposersPanel formId={route.formId} navigator={navigator} />
+                        </Ons.Page>
+
+                    case 'formComposerWorks':
+                        return <Ons.Page key="formComposerWorks">
+                            <BrowseFormComposerWorksPanel formId={route.formId} composerId={route.composerId} navigator={navigator} />
                         </Ons.Page>
 
                     default:

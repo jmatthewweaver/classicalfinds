@@ -55,6 +55,9 @@
     <select id="search" parameterType="map" resultMap="resultMap">
         <include refid="selectFromSql"/>
         <where>
+            <if test="formId != null">
+                AND w.form_id = #{formId,jdbcType=NUMERIC}
+            </if>
             <if test="genreId != null">
                 AND w.genre_id = #{genreId,jdbcType=NUMERIC}
             </if>

@@ -27,8 +27,9 @@ public class WorkDao {
         return sqlSession.selectList("com.iw.cf.mybatis.Work.getWorksToProcess");
     }
 
-    public List<Work> search(Long genreId, Long composerId) {
+    public List<Work> search(Long formId, Long genreId, Long composerId) {
         Map<String, Object> params = new HashMap<>();
+        params.put("formId", formId);
         params.put("genreId", genreId);
         params.put("composerId", composerId);
         return sqlSession.selectList("com.iw.cf.mybatis.Work.search", params);
