@@ -25,37 +25,29 @@ class WorkPanel
             display: 'flex',
             flexFlow: 'column nowrap'
         }}>
-            <div style={{flex: 1, display: 'flex', alignContent: 'center', justifyContent: 'center'}}>
-                <div style={{width: '100%'}}>
-                    <Ons.List dataSource={this.context.workVideos[this.props.workId]}
-                              className="workVideoList"
-                              modifier="inset"
-                              style={{
-                                  width: '80%',
-                                  marginLeft: '10%',
-                                  marginTop: '1em'
-                              }}
-                              renderRow={(item) => <Ons.ListItem key={item.id}
-                                                                 onClick={() => {
-                                                                     this.context.updateActiveWork(item);
-                                                                     this.setState({
-                                                                         selectedItemId: item.id
-                                                                     })
-                                                                 }}
-                                                                 className={item.id === this.state.selectedItemId ? 'active' : ''}
-                                                                 modifier="">
-                                  <Ons.Icon icon="fa-youtube" style={{marginRight: '1em', color: '#e00'}}/>
-                                  <div style={{width: 'calc(100% - 3em)'}}>
-                                      <div style={{
-                                          overflow: 'hidden',
-                                          textOverflow: 'ellipsis',
-                                          whiteSpace: 'nowrap',
-                                          maxWidth: '100%'
-                                      }}>{item.title}</div>
-                                  </div>
-                              </Ons.ListItem>}
-                    />
-                </div>
+            <div style={{flex: 1, overflow: 'auto'}}>
+                <Ons.List dataSource={this.context.workVideos[this.props.workId]}
+                          className="workVideoList"
+                          renderRow={(item) => <Ons.ListItem key={item.id}
+                                                             onClick={() => {
+                                                                 this.context.updateActiveWork(item);
+                                                                 this.setState({
+                                                                     selectedItemId: item.id
+                                                                 })
+                                                             }}
+                                                             className={item.id === this.state.selectedItemId ? 'active' : ''}
+                                                             modifier="">
+                              <Ons.Icon icon="fa-youtube" style={{marginRight: '1em', color: '#e00'}}/>
+                              <div style={{width: 'calc(100% - 3em)'}}>
+                                  <div style={{
+                                      overflow: 'hidden',
+                                      textOverflow: 'ellipsis',
+                                      whiteSpace: 'nowrap',
+                                      maxWidth: '100%'
+                                  }}>{item.title}</div>
+                              </div>
+                          </Ons.ListItem>}
+                />
             </div>
             <Ons.Button icon="fa-arrow-left" onClick={() => this.props.navigator.popPage()}
                         className="backButton" style={{flex: 'none'}}>
